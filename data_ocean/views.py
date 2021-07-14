@@ -152,7 +152,8 @@ class DOAutoSchemaClass(SwaggerAutoSchema):
 
         elif operation_keys[-1] == 'check':
             example_curl = f"curl -X GET -H 'Authorization: DataOcean {{token}}' \\\n{settings.BACKEND_SITE_URL}/" \
-                           f"api/{'/'.join(operation_keys[:-1])}/?id=&date_of_birth={{date}}&o="
+                           f"api/{'/'.join(operation_keys[:-1])}/?id=&date_of_birth={{date}}&o=" \
+                           f"{'/'.join(operation_keys[:-1])}/"
             example_python = "import requests\nfrom pprint import pprint\n\n" \
                              f"response = requests.get(\n\t'{settings.BACKEND_SITE_URL}/api/" \
                              f"?id=&date_of_birth={{date}}&o={'/'.join(operation_keys[:-1])}/',\n" \
