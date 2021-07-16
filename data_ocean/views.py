@@ -151,12 +151,11 @@ class DOAutoSchemaClass(SwaggerAutoSchema):
                            "\t.send(request, HttpResponse.BodyHandler.asString());"
 
         elif operation_keys[-1] == 'check':
-            example_curl = f"curl -X GET -H 'Authorization: DataOcean {{token}}' \\\n{settings.BACKEND_SITE_URL}/" \
-                           f"api/{'/'.join(operation_keys[:-1])}/?id=&date_of_birth={{date}}&o=" \
-                           f"{'/'.join(operation_keys[:-1])}/"
+            example_curl = f"curl -X GET -H 'Authorization: DataOcean {{token}}' \\\n'{settings.BACKEND_SITE_URL}/" \
+                           f"api/{'/'.join(operation_keys[:-1])}/check/?first_name={{first_name}}&last_name={{last_name}}'"
             example_python = "import requests\nfrom pprint import pprint\n\n" \
                              f"response = requests.get(\n\t'{settings.BACKEND_SITE_URL}/api/" \
-                             f"?id=&date_of_birth={{date}}&o={'/'.join(operation_keys[:-1])}/',\n" \
+                             f"{'/'.join(operation_keys[:-1])}/check/?first_name={{first_name}}&last_name={{last_name}}',\n" \
                              f"\tparams={{'page': 1, 'page_size': 20}},\n" \
                              f"\theaders={{'Authorization': 'DataOcean {{token}}'}},\n)\n\n" \
                              "pprint(response.json())"
@@ -164,11 +163,11 @@ class DOAutoSchemaClass(SwaggerAutoSchema):
                           "\n\t\t\t    'Authorization: DataOcean {token}', \n\t\t\t    'Content-type: application/json'," \
                           f"\n\t\t\t    'Host: {str(settings.BACKEND_SITE_URL)[8:]}'\n\t]\n];\n$context = stream_" \
                           f"context_create($opts);\n$response = file_get_contents('{settings.BACKEND_SITE_URL}/api/" \
-                          f"?id=&date_of_birth={{date}}&o=" \
-                          f"{'/'.join(operation_keys[:-1])}', false, $context);\nvar_dump($response);"
+                          f"{'/'.join(operation_keys[:-1])}/check/" \
+                          f"?first_name={{first_name}}&last_name={{last_name}}', false, $context);\nvar_dump($response);"
             example_java = "HttpRequest request = HttpRequest.newBuilder()\n" \
-                           f"\t.uri(new URI('{settings.BACKEND_SITE_URL}/api/?id=&date_of_birth={{date}}&o=" \
-                           f"{'/'.join(operation_keys[:-1])}/'))\n" \
+                           f"\t.uri(new URI('{settings.BACKEND_SITE_URL}/api/" \
+                           f"{'/'.join(operation_keys[:-1])}/check/?first_name={{first_name}}&last_name={{last_name}}'))\n" \
                            "\t.header('Authorization', 'DataOcean {token}')\n" \
                            "\t.GET()\n" \
                            "\t.build();\n" \
