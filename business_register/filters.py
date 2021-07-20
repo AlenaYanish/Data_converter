@@ -361,6 +361,14 @@ class CompanySanctionFilterSet(BaseSanctionFilter):
         return queryset.filter(
             Q(country_of_registration__name__icontains=value) | Q(country_of_registration__name_uk__icontains=value)
         )
+    o = filters.OrderingFilter(
+        fields=(
+            ('name', 'name'),
+            ('start_date', 'start_date'),
+            ('end_date', 'end_date'),
+        ),
+        help_text='Sort by fields: name, start_date, end_date.'
+    )
 
     class Meta:
         model = CompanySanction
