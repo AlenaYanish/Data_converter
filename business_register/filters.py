@@ -356,6 +356,14 @@ class CompanySanctionFilterSet(BaseSanctionFilter):
         help_text='Filter by country_of_registration of company in English and Ukrainian.'
                   'Type: case insensitive string contains',
     )
+    o = filters.OrderingFilter(
+        fields=(
+            ('name', 'name'),
+            ('start_date', 'start_date'),
+            ('end_date', 'end_date'),
+        ),
+        help_text='Sort by fields: name, start_date, end_date.'
+    )
 
     def filter_two_country_of_registration_fields(self, queryset, name, value):
         return queryset.filter(
